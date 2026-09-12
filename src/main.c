@@ -1,12 +1,14 @@
+#define _POSIX_C_SOURCE 200809L
+
 #include <stdio.h>
 #include <time.h>
+#include <stdlib.h>
 #include "game.h"
 
-#define STEP_DELAY_MS 150   // 150 ms entre chaque déplacement
-#define SQUARE_SIZE   5     // nombre de pas par côté du carré
+#define STEP_DELAY_MS 150
 
 void clear_screen(void){
-    printf("\033[H\033[J");   // ANSI : replace le curseur en haut et efface l'écran
+    printf("\033[H\033[J");
 }
 
 void sleep_ms(long ms){
@@ -25,32 +27,30 @@ int main(void)
         return 1;
     }
 
-    char directions[4] = { DIR_RIGHT, DIR_DOWN, DIR_LEFT, DIR_UP };
+    input_enable_raw_mode();
+    atexit(input_disable_raw_mode);   // remet le terminal normal, même en cas de sortie brutale
+
+    char direction = DIR_RIGHT;   // direction de départ
 
     while (game->snake->alive){
 
-        for(int side = 0; side < 4 && game->snake->alive; side++){
+        direction = input_read_direction(direction);
 
-            for(int step = 0; step < SQUARE_SIZE && game->snake->alive; step++){
+        snake_move(direction, game->snake);
 
-                snake_move(directions[side], game->snake);
+        if(!game->snake->alive) break;
 
-                if(!game->snake->alive) break;
+        clear_screen();
 
-                update(game);
+        update(game);
 
-                clear_screen();
-                toString(game->map);
-
-                sleep_ms(STEP_DELAY_MS);
-            }
-        }
+        sleep_ms(STEP_DELAY_MS);
     }
 
     printf("Le serpent est mort.\n");
 
     map_free(game->map);
-    // pensez à appeler snake_free(game->snake) ici si la fonction existe dans votre code
+    snake_free(game->snake);
     free(game);
 
     return 0;

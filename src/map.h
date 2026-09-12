@@ -10,9 +10,9 @@ struct Map{
 
 struct Map* map_create();
 
-char get_info(int width, int height, struct Map* map);
+char map_get(int width, int height, struct Map* map);
 
-void set(int width, int height, struct Map* map, char c);
+void map_set(int width, int height, struct Map* map, char c);
 
 void map_free(struct Map* map);
 

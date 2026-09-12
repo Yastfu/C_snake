@@ -46,7 +46,7 @@ struct Map* map_create(){
   return map;
 }
 
-char get_info(int width, int height, struct Map *map)
+char map_get(int width, int height, struct Map *map)
 {
 
   if(map == NULL || map->map == NULL) return '\0';
@@ -58,7 +58,7 @@ char get_info(int width, int height, struct Map *map)
   return map->map[height][width];
 }
 
-void set(int width, int height, struct Map* map, char c){
+void map_set(int width, int height, struct Map* map, char c){
   
   if(map == NULL || map->map == NULL) return;
   if(height < 0 || height >= MAP_HEIGHT) return;

@@ -4,6 +4,7 @@
 #include "map.h"
 #include "snake.h"
 #include "constants.h"
+#include "input.h"
 
 
 struct Game{

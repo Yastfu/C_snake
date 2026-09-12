@@ -21,19 +21,21 @@ void update(struct Game* game){
   if(game == NULL) return;
 
   if(!game->snake->justGrew){
-    set(game->snake->prevTailWidth, game->snake->prevTailHeight, game->map, ' ');
+    map_set(game->snake->prevTailWidth, game->snake->prevTailHeight, game->map, ' ');
   }
 
   struct SnakePart* currentPart = game->snake->snakeHead;
 
   while(currentPart->nextPart != NULL){
 
-    set(currentPart->width, currentPart->height, game->map, currentPart->part);
+    map_set(currentPart->width, currentPart->height, game->map, currentPart->part);
 
     currentPart = currentPart->nextPart;
   }
 
-  set(currentPart->width, currentPart->height, game->map, currentPart->part);
+  map_set(currentPart->width, currentPart->height, game->map, currentPart->part);
+
+  toString(game->map);
 }
 
 void start(){
