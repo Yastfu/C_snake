@@ -1,6 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include "pellet.h"
+#include "game.h"
 
 #define ZONE_LARGEUR (MAP_WIDTH  - 2)
 #define ZONE_HAUTEUR (MAP_HEIGHT - 2)

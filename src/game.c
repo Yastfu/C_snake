@@ -1,5 +1,4 @@
 #include "game.h"
-#include "pellet.h"
 #include <time.h>
 
 struct Game* init() {
@@ -39,6 +38,11 @@ void update(struct Game* game){
 
 void start(struct Game* game){
 
+  clear_screen();
+  welcome_show();
+  printf("\nAppuyez sur Entree pour commencer...\n");
+  getchar();
+
   srand(time(NULL));
 
   input_enable_raw_mode();
@@ -71,7 +75,10 @@ void start(struct Game* game){
     sleep_ms(STEP_DELAY_MS);
   }
 
-  printf("Le serpent est mort. Score : %d\n", game->snake->size - 2);
+  input_disable_raw_mode();
+
+  clear_screen();
+  gameover_show(game->snake->size - 2);
 
   map_free(game->map);
   snake_free(game->snake);

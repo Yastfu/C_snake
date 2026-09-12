@@ -5,6 +5,8 @@
 #include "snake.h"
 #include "constants.h"
 #include "input.h"
+#include "pellet.h"
+#include "welcome.h"
 
 
 struct Game{

@@ -48,6 +48,27 @@ void snake_kill(struct Snake* snake){
   snake->alive = false;
 }
 
+bool snake_check_self_collision(struct Snake* snake){
+
+  if(snake == NULL || snake->snakeHead == NULL) return false;
+
+  int headWidth  = snake->snakeHead->width;
+  int headHeight = snake->snakeHead->height;
+
+  struct SnakePart* current = snake->snakeHead->nextPart;
+
+  while(current != NULL){
+
+    if(current->width == headWidth && current->height == headHeight){
+      return true;
+    }
+
+    current = current->nextPart;
+  }
+
+  return false;
+}
+
 void snake_move(char dir, struct Snake* snake){
 
   snake->direction = dir;
@@ -65,7 +86,7 @@ void snake_move(char dir, struct Snake* snake){
 
   if(snake->direction == DIR_UP){
 
-    if(snake->snakeHead->height <= 1){          // 1 = juste après le mur du haut
+    if(snake->snakeHead->height <= 1){
       snake_kill(snake);
       return;
     }
@@ -75,7 +96,7 @@ void snake_move(char dir, struct Snake* snake){
 
   else if(snake->direction == DIR_DOWN){
 
-    if(snake->snakeHead->height >= MAP_HEIGHT - 2){   // juste avant le mur du bas
+    if(snake->snakeHead->height >= MAP_HEIGHT - 2){
       snake_kill(snake);
       return;
     }
@@ -85,7 +106,7 @@ void snake_move(char dir, struct Snake* snake){
 
   else if(snake->direction == DIR_LEFT){
 
-    if(snake->snakeHead->width <= 1){            // juste après le mur de gauche
+    if(snake->snakeHead->width <= 1){
       snake_kill(snake);
       return;
     }
@@ -95,7 +116,7 @@ void snake_move(char dir, struct Snake* snake){
 
   else if(snake->direction == DIR_RIGHT){
 
-    if(snake->snakeHead->width >= MAP_WIDTH - 2){     // juste avant le mur de droite
+    if(snake->snakeHead->width >= MAP_WIDTH - 2){
       snake_kill(snake);
       return;
     }
@@ -117,6 +138,11 @@ void snake_move(char dir, struct Snake* snake){
     oldWidth  = tmpWidth;
 
     current = current->nextPart;
+  }
+
+  if(snake_check_self_collision(snake)){
+    snake_kill(snake);
+    return;
   }
 }
 

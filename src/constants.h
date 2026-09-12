@@ -1,7 +1,7 @@
 #ifndef _CONSTANTS_H
 #define _CONSTANTS_H
 
-#define MAP_WIDTH 70
+#define MAP_WIDTH 50
 #define MAP_HEIGHT 20
 #define TOT_CASE (MAP_HEIGHT*MAP_WIDTH)
 
