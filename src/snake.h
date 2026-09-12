@@ -2,6 +2,8 @@
 #define _SNAKE_H
 
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "constants.h"
 #include <stdlib.h>
 

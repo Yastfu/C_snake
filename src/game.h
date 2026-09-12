@@ -9,16 +9,22 @@
 
 struct Game{
 
-  struct Map *map;
+  struct Map* map;
 
-  struct Snake *snake;
+  struct Snake* snake;
+
+  struct Point* points;
 };
 
 struct Game* init();
 
 void update(struct Game* game);
 
-void start();
+void start(struct Game* game);
+
+void sleep_ms(long ms);
+
+void clear_screen(void);
 
 
 

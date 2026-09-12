@@ -1,11 +1,4 @@
-#define _POSIX_C_SOURCE 200809L
-
-#include <stdio.h>
-#include <unistd.h>
-#include <termios.h>
-#include <fcntl.h>
 #include "input.h"
-#include "game.h"   // pour DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT
 
 static struct termios orig_termios;
 

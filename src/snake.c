@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "snake.h"
 
 struct Snake* snake_create(){
@@ -145,6 +143,28 @@ void snake_dequeue(struct Snake* snake){
   } else {
     prevSnakePart->nextPart = NULL;
   }
+}
+
+void snake_grow(struct Snake* snake){
+
+  if(snake == NULL || !snake->alive) return;
+
+  struct SnakePart* newTail = malloc(sizeof(struct SnakePart));
+  if(newTail == NULL) return;
+
+  newTail->height = snake->prevTailHeight;
+  newTail->width  = snake->prevTailWidth;
+  newTail->part   = SNAKE_BODY;
+  newTail->nextPart = NULL;
+
+  struct SnakePart* tail = snake->snakeHead;
+  while(tail->nextPart != NULL){
+    tail = tail->nextPart;
+  }
+  tail->nextPart = newTail;
+
+  snake->size = snake->size + 1;
+  snake->justGrew = true;
 }
 
 void snake_free(struct Snake* snake){
