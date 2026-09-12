@@ -15,10 +15,10 @@ static const char* welcome_lines[] = {
     "|                                                  |",
     "|                @oooooo.......*                   |",
     "|                                                  |",
-    "|          Appuyez sur une touche flechee          |",
-    "|                  pour commencer                  |",
+    "|          Appuyez sur les touches fleches         |",
+    "|             pour controlre le serpent            |",
     "|                                                  |",
-    "|                  ESC pour quitter                |",
+    "|                                                  |",
     "|                                                  |",
     "|                                                  |",
     "+--------------------------------------------------+"
