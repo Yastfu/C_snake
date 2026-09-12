@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "map.h"
-#include "constants.h"
+
 
 struct Map* map_create(){
 
@@ -49,6 +49,8 @@ struct Map* map_create(){
 char get_info(int width, int height, struct Map *map)
 {
 
+  if(map == NULL || map->map == NULL) return '\0';
+
   if(height < 0 || height >= MAP_HEIGHT) return '\0';
 
   if(width < 0 || width >= MAP_WIDTH) return '\0';
@@ -56,8 +58,19 @@ char get_info(int width, int height, struct Map *map)
   return map->map[height][width];
 }
 
+void set(int width, int height, struct Map* map, char c){
+  
+  if(map == NULL || map->map == NULL) return;
+  if(height < 0 || height >= MAP_HEIGHT) return;
+  if(width < 0 || width >= MAP_WIDTH) return;
+
+  map->map[height][width] = c;
+}
+
 void toString(struct Map *map)
 {
+
+  if(map == NULL) return;
 
   for(int y=0; y<MAP_HEIGHT; y++){
     printf("%s\n", map->map[y]);

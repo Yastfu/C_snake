@@ -15,6 +15,10 @@ struct Game{
 
 struct Game* init();
 
+void update(struct Game* game);
+
 void start();
+
+
 
 #endif

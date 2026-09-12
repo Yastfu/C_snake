@@ -7,9 +7,33 @@ struct Game* init() {
   if(currentGame == NULL) return NULL;
 
   currentGame->map = map_create();
-  currentGame->snake = NULL;
+  if(currentGame->map == NULL) return NULL;
+
+  currentGame->snake = snake_create();
+  if(currentGame->snake == NULL) return NULL;
 
   return currentGame;
+}
+
+
+void update(struct Game* game){
+
+  if(game == NULL) return;
+
+  if(!game->snake->justGrew){
+    set(game->snake->prevTailWidth, game->snake->prevTailHeight, game->map, ' ');
+  }
+
+  struct SnakePart* currentPart = game->snake->snakeHead;
+
+  while(currentPart->nextPart != NULL){
+
+    set(currentPart->width, currentPart->height, game->map, currentPart->part);
+
+    currentPart = currentPart->nextPart;
+  }
+
+  set(currentPart->width, currentPart->height, game->map, currentPart->part);
 }
 
 void start(){
